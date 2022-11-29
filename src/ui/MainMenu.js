@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom'
-import { makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 
 const useStyle = makeStyles(theme => ({
   link: {
@@ -17,6 +17,7 @@ const useStyle = makeStyles(theme => ({
 export default function MainMenu() {
 
   const classes = useStyle()
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -36,10 +37,10 @@ export default function MainMenu() {
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}>
+        onClick={handleClick}
+      >
         <MenuIcon />
       </IconButton>
-      
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -50,22 +51,19 @@ export default function MainMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <Link to="/aluno" className={classes.link}> Listagem de alunos</Link>
+          <Link to="/login" className={classes.link}>Autenticar-se</Link>
+        </MenuItem>
+        <MenuItem>
+          <hr className={classes.link} />
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Link to="/aluno/novo" className={classes.link}> Cadastrar novo aluno </Link>
+          <Link to="/aluno" className={classes.link}>Listagem de alunos</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Link to="/professor" className={classes.link}> Listagem de professores </Link>
+          <Link to="/aluno/novo" className={classes.link}>Cadastrar novo aluno</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Link to="/professor/novo" className={classes.link}> Cadastrar novo professor </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link to="/curso" className={classes.link}> Listagem de cursos </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link to="/curso/novo" className={classes.link}> Cadastrar novo curso </Link>
+          <Link to="/sobre" className={classes.link}>Sobre</Link>
         </MenuItem>
         
       </Menu>

@@ -57,14 +57,12 @@ export default function AlunoForm() {
 
     const navigate = useNavigate()
 
-    const params = useParams()//consegue Verifica se na rota tem parametros
+    const params = useParams()
 
     const [state, setState] = React.useState(
         // Lazy initalizer
         () => ({
-            // Campos correspondentes a controles de seleção
-            // precisam ter um valor inicial  
-            aluno: {
+            aluno: { 
                 nome: '',
                 data_nascimento: '',
                 doc_identidade: '',
@@ -77,7 +75,7 @@ export default function AlunoForm() {
                 uf: '', 
                 telefone: '',
                 email: '',
-                turma: ''   
+                turma: ''                 
             },
             alertSeverity: 'success',
             isAlertOpen: false,
@@ -99,17 +97,17 @@ export default function AlunoForm() {
 
     React.useLayoutEffect(() => {
 
-        //Se houver parameto na rota, estamos editando um registro já existente
-        //portanto precisamos buscar os dados desse registro
-        //para carregar nos campos e editar
-        if(params.id){
+        // Se houver parâmetro na rota, estamos editando um registro já
+        // existente. Portanto, precisamos buscar os dados desse registro
+        // para carregar nos campos e editar
+        if(params.id) {
             fetchData()
         }
 
-    }, []) //Dependencias vazias, executa só no carregamento do componente
+    }, [])  // Dependências vazias, executa só no carregamento do componente
 
-    async function fetchData(){
-        try{
+    async function fetchData() {
+        try {
             const response = await api.get(`alunos/${params.id}`)
             setState({
                 ...state,
@@ -117,11 +115,11 @@ export default function AlunoForm() {
                 pageTitle: 'Editando aluno id. ' + params.id
             })
         }
-        catch(erro){
+        catch(erro) {
             setState({
                 ...state,
                 alertSeverity: 'error',
-                alertMessage: 'ERRO' + erro.message,
+                alertMessage: 'ERRO: ' + erro.message,
                 isAlertOpen: true,
                 pageTitle: '## ERRO ##'
             })
@@ -165,15 +163,16 @@ export default function AlunoForm() {
         setState({...state, isModalProgressOpen: true})
 
         try {
+            // Se aluno.id existe, estamos editando, verbo PUT
             if(aluno.id) await api.put(`alunos/${params.id}`, aluno)
+            // Senão, estamos criando um novo, verbo POST
             else await api.post('alunos', aluno)
 
             setState({
                 ...state,
                 isAlertOpen: true,
                 alertSeverity: 'success',
-                alertMessage: 'Dados salvos com sucesso',
-                //isModalProgressOpen: true
+                alertMessage: 'Dados salvos com sucesso'
             })
         } 
         catch(erro) {
@@ -181,8 +180,7 @@ export default function AlunoForm() {
                 ...state,
                 isAlertOpen: true,
                 alertSeverity: 'error',
-                alertMessage: 'ERRO: ' + erro.message,
-                //isModalProgressOpen: true
+                alertMessage: 'ERRO: ' + erro.message
             })
         }
     }
@@ -425,6 +423,7 @@ export default function AlunoForm() {
                     </Button>
                     <Button
                         variant="outlined"
+                        onClick={handleVoltarButtonClick}
                     >
                         Voltar
                     </Button>
@@ -432,6 +431,7 @@ export default function AlunoForm() {
 
             </form>
 
+            {/* <p>{JSON.stringify(aluno)}</p> */}
         </>
     )
 }

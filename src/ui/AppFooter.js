@@ -2,43 +2,43 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import { Typography } from '@mui/material';
-import {makeStyles} from "@mui/styles";
-import CoffeeIcon from '@mui/icons-material/Coffee';
+import Typography from '@mui/material/Typography'
+import { makeStyles } from '@mui/styles'
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 
-const useStyles = makeStyles(theme=>({
-  box:{
-    position: "fixed",
+const useStyles = makeStyles(theme => ({
+  box: {
+    position: 'fixed',
     bottom: 0,
-    width:"100%"
+    width: '100%'
   },
-  toolbar:{
+  toolbar: {
     backgroundColor: theme.palette.action.selected
   },
-  typog:{
-    textAlign: "center",
-    width: "100%"
+  typog: {
+    textAlign: 'center',
+    width: '100%'
   },
-  link:{
+  link: {
     color: theme.palette.secondary.main,
     textDecoration: 'none',
-    '&:hover':{
-      textDecoration:'underline'
+    '&:hover': {  // Mouse sobre o link
+      textDecoration: 'underline'
     }
   }
-
 }))
 
 export default function AppFooter() {
-  const classes = useStyles();
+
+  const classes = useStyles()
 
   return (
     <Box sx={{ flexGrow: 1 }} className={classes.box}>
       <AppBar position="static" component="footer">
         <Toolbar variant="dense" className={classes.toolbar}>
-          <Typography className={classes.typog} variant="caption">
-              Desenvolvido com <CoffeeIcon fontSize="small"/> por <a className={classes.link} href='https://github.com/GustavoSilvah'>Gustavo Silva</a>
-          </Typography >
+          <Typography variant="caption" className={classes.typog}>
+            Desenvolvido com <LocalCafeIcon fontSize="small" /> por <a className={classes.link} href="mailto:professor@faustocintra.com.br">Prof. Fausto G. Cintra</a>
+          </Typography>
         </Toolbar>
       </AppBar>
     </Box>
