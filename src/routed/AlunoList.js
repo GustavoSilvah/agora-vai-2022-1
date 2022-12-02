@@ -169,8 +169,8 @@ export default function AlunoList() {
 
     async function fetchData(newState = state) {
         try {
-            const response = await api.get('aluno')
-            setState({...newState, data: response.data, isDialogOpen: false})
+            const response = await api.get('aluno').json()
+            setState({...newState, data: response, isDialogOpen: false})
         }
         catch(erro) {
             // Mostrar erro com barra de alerta

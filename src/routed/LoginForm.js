@@ -25,16 +25,30 @@ export default function LoginForm() {
     }
 
     async function handleFormSubmit(event) {
-        setState({...state, aguardando: true})
-        event.preventDefault()
+        setState({...state, aguardando: true})    // Exibe o backdrop
+        event.preventDefault()  // Evita o recarregamento da página
         try {
-            const result = await api.post('usuario/login', {email, senha})
-            setState({...state, resultado: result.data, aguardando: false})
+          const response = await api.post('usuario/login', {json: {email, senha}}).json()
+          setState({
+            ...state, 
+            resultado: response, 
+            aguardando: false,
+            alertBarOpen: true,
+            alertBarSeverity: 'success',
+            alertBarMsg: 'Autenticação efetuada com sucesso'
+          })
         }
         catch(error) {
-            setState({...state, resultado: 'ERRO: ' + error.message, aguardando:false})
-        }
-    }
+          setState({
+            ...state, 
+            resultado: 'ERRO: ' + error.message, 
+            aguardando: false,
+            alertBarOpen: true,
+            alertBarSeverity: 'error',
+            alertBarMsg: 'ERRO: ' + error.message
+          })
+        } 
+      }
 
     return (
         <>
